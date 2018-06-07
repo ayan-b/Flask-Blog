@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    {% if title %}
+        <title>Flask Blog - {{ title }}</title>
+    {% else %}
+        <title>Flask Blog</title>
+    {% endif %}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+    <!-- Compiled and minified CSS -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='materialize/css/materialize.min.css') }} " media="screen, projection"/>
+
+    <!-- css file -->
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='main.css') }}">
+
+    <!-- Font Awesome for logos -->
+    <!-- <script src="https://use.fontawesome.com/b116e25694.js"></script> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='fontawesome-free-5.0.13/web-fonts-with-css/css/fontawesome-all.min.css') }}">
+
+    <!-- Emoji support -->
+    <link href="https://afeld.github.io/emoji-css/emoji.css" rel="stylesheet">
+
+    <script src="main.js"></script>
+</head>
+<body>
+
+    <!-- Top Navigation Bar -->
+    <nav>
+        <div class="nav-wrapper">
+            <a href="#!" class="brand-logo">Blog</a>
+            <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a class="btn waves-effect waves-light" href="/login">Log In</a></li>
+            <li><a class="btn waves-effect waves-light" href="/register">Sign Up</a></li>
+            </ul>
+            <ul class="side-nav" id="mobile-demo">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About</a></li>
+            <li><a class="btn waves-effect waves-light" href="/login">Log In</a></li>
+            <li><a class="btn waves-effect waves-light" href="/register">Sign Up</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Side Bar -->
+    <ul id="slide-out" class="side-nav">
+        </li>
+        <li><a class="wave-effects" href="#">Latest Post</a></li>
+        <li><a class="wave-effects" href="#">Announcements</a></li>
+        <li><a class="wave-effects" href="#">Calendar</a></li>
+        <li><a class="wave-effects" href="#">etc</a></li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="wave-effects waves-light btn button-collapse"><i class="material-icons right">menu</i>REVEAL SIDEBAR</a>
+
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true)%}
+            {% if messages %}
+                {% for category, message in messages %}
+                <div class="validate alert-{{ category }}">
+                    {{ messages}}
+                </div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+        {% block content %}
+        {% endblock %}
+    </div>
+    
+    <!--Import jQuery before materialize.js-->
+    <script type="text/javascript" src="{{ url_for('static', filename='jquery-3.2.1.min.js') }}"></script>
+
+    <!-- Compiled and minified JavaScript -->
+    <script type="text/javascript" src="{{ url_for('static', filename='materialize/js/materialize.min.js') }}"></script>
+
+    <script>$(".button-collapse").sideNav();</script>
+</body>
